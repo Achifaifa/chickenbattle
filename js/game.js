@@ -5,3 +5,8 @@ ctx.canvas.width=800;
 ctx.canvas.height=600;
 ctx.fillStyle="white"
 ctx.font="15px sans-serif";
+
+function main()
+{
+
+}
