@@ -8,7 +8,7 @@ ctx.font="15px sans-serif";
 
 function main()
 {
-
+	mainMenu();
 }
 world={
   p1={
