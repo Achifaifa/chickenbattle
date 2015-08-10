@@ -12,6 +12,4 @@ function mainMenu()
 	{
 		ctx.drawImage(fondo,0,-imgalto/4,imgancho,imgalto);
 	}
-
-	
 }

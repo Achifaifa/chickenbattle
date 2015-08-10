@@ -10,3 +10,18 @@ function main()
 {
 	mainMenu();
 }
+world={
+  p1={
+    name=null
+    life=0-1
+    maxlife=0-1
+    character=null
+  }
+  p2={
+    name=null
+    life=-1
+    maxlife=-1
+    character=null
+  }
+}
+gui(ctx,world)
