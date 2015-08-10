@@ -24,5 +24,3 @@ world={
     character:null
   }
 }
-
-main();
