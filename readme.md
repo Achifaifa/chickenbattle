@@ -1,7 +1,7 @@
 #WIP
 
-Red 
-Yawin
-Zuzumba
-Achifaifa
-Bluemagus
+Red   
+Yawin  
+Zuzumba  
+Achifaifa  
+Bluemagus  
