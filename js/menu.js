@@ -6,7 +6,7 @@ function mainMenu()
 	imgancho=ctx.canvas.width;
 	imgalto=(imgancho*720)/1280;
 	imgx=0;
-	imgy=-imgalto/2
+	imgy=-imgalto/2;
 
 	fondo.onload = function()
 	{
