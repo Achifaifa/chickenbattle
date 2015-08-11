@@ -13,12 +13,28 @@ world={
     life:100,
     maxlife:100,
     character:null,
+    controls:{
+      left:",",
+      right:".",
+      jump:"z",
+      punch:"x",
+      kick:"c"
+    },
+    pos:{x:(window.innerWidth/4)-testplayer.width,y:window.innerHeight/2},
   },
   p2:{
     namev:"Player 2",
     life:100,
     maxlife:100,
     character:null,
+    controls:{
+      left:null,
+      right:null,
+      jump:null,
+      punch:null,
+      kick:null
+    },
+    pos:{x:window.innerWidth*3/4,y:window.innerHeight/2},
   },
   roundtime:99,
   rounds:{1:0,2:0,3:0}

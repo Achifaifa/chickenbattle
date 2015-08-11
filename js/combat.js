@@ -1,5 +1,7 @@
 fightbg=new Image()
 fightbg.src="./img/fight_background.jpg"
+testplayer=new Image()
+testplayer.src="./img/test-sprite.png"
 
 
 function background(ctx){
@@ -16,11 +18,6 @@ function gui(ctx,w){
   Timer: Double digits 150x150px in the middle
   Health: 30px height, 20px vert margin, 50px hor margin
   */
-
-  //Temporary. The combat renderer should clear the screen first
-  // ctx.fillStyle="black"
-  // ctx.fillRect(0,0,window.innerWidth,window.innerHeight)
-  // ctx.fillStyle="#AAAAAA"
 
   // Calculate reference points
   var middle=window.innerWidth/2
@@ -55,9 +52,16 @@ function gui(ctx,w){
   ctx.stroke()
 }
 
+function drawchars(ctx,w){
+
+  ctx.drawImage(testplayer,w.p1.pos.x,w.p1.pos.y)
+  ctx.drawImage(testplayer,w.p2.pos.x,w.p2.pos.y)
+}
+
 function fight(ctx,w){
 
   background(ctx);
+  drawchars(ctx,w);
   gui(ctx,w)
 
 }
