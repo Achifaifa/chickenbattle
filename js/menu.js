@@ -3,6 +3,7 @@ subimgy=0;
 subimgancho=0;
 subimgalto=0;
 cont=0;
+menuid=0;
 
 function mainMenu()
 {
@@ -66,7 +67,7 @@ function drawBack()
 function drawSubtitle()
 {
 	var subtitle = new Image();
-	subtitle.src= 'img/subtitle.png';
+	subtitle.src = 'img/subtitle.png';
 
 	subtitle.onload = function()
 	{
@@ -82,10 +83,36 @@ function subtitleLoop()
 
 	drawBack();
 	drawSubtitle();
-	setTimeout(subtitleLoop, 50);
+
+	if(menuid==0)
+	{
+		setTimeout(subtitleLoop, 50);
+	}
+}
+
+function drawSelBack()
+{
+	var back = new Image();
+	back.src = 'img/fondosel.jpg';
+
+	back.onload = function()
+	{
+		ctx.drawImage(back,0,0,ctx.canvas.width,ctx.canvas.height);
+	}
 }
 
 function selMenu()
 {
-		
+	menuid=1;
+	drawSelBack();
+	selMenuLoop();
+}
+
+function selMenuLoop()
+{
+	drawSelBack();
+	if(menuid==1)
+	{
+		setTimeout(selMenuLoop, 50);
+	}
 }
