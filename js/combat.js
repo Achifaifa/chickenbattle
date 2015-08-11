@@ -1,15 +1,18 @@
 fightbg=new Image()
 fightbg.src="./img/fight_background.jpg"
+testplayer=new Image()
+testplayer.src="./img/test-sprite.png"
 
 
-function background(ctx){
+function background(){
+
   ctx.fillStyle=ctx.createPattern(fightbg, 'repeat');
   // ctx.image(fightbg,0,0)
   ctx.fillRect(0,0,window.innerWidth,window.innerHeight)
   ctx.fillStyle="#AAAAAA"
 }
 
-function gui(ctx,w){
+function gui(){
   /*
   Draws the combat layout (Health bars, timer, etc)
 
@@ -17,22 +20,17 @@ function gui(ctx,w){
   Health: 30px height, 20px vert margin, 50px hor margin
   */
 
-  //Temporary. The combat renderer should clear the screen first
-  // ctx.fillStyle="black"
-  // ctx.fillRect(0,0,window.innerWidth,window.innerHeight)
-  // ctx.fillStyle="#AAAAAA"
-
   // Calculate reference points
   var middle=window.innerWidth/2
 
   // Draw time counter
-  var timeleft=('00'+w.roundtime).slice(-2);
+  var timeleft=('00'+world.roundtime).slice(-2);
   ctx.font="60px sans-serif";
   ctx.fillText(timeleft,middle-39,75)
 
   // Draw life bars
-  var perc1=(w.p1.life*100)/w.p1.maxlife
-  var perc2=(w.p2.life*100)/w.p2.maxlife
+  var perc1=(world.p1.life*100)/world.p1.maxlife
+  var perc2=(world.p2.life*100)/world.p2.maxlife
   ctx.rect(50,20,middle-100,50)
   ctx.rect(window.innerWidth-50,20,-middle+100,50)
   ctx.stroke()
@@ -48,16 +46,45 @@ function gui(ctx,w){
 
   // Draw names
   ctx.font="30px sans-serif";
-  ctx.fillText(w.p1.namev,60,100)
-  ctx.fillText(w.p2.namev,window.innerWidth-60-(w.p2.namev.length*15),100)
+  ctx.fillText(world.p1.namev,60,100)
+  ctx.fillText(world.p2.namev,window.innerWidth-60-(world.p2.namev.length*15),100)
   ctx.font="15px sans-serif";
 
   ctx.stroke()
 }
 
-function fight(ctx,w){
+function drawchars(){
 
-  background(ctx);
-  gui(ctx,w)
+  ctx.drawImage(testplayer,world.p1.pos.x,world.p1.pos.y)
+  ctx.drawImage(testplayer,world.p2.pos.x,world.p2.pos.y)
+}
+
+function render(){
+
+  background();
+  drawchars();
+  gui()
+}
+
+function processkey(ev){
+
+  console.log("event!")
+  console.log(ev)
+  switch (ev.key){
+  case world.p1.controls.left: 
+    console.log("P1 l")
+    world.p1.pos.x-=10
+    break;
+  case world.p1.controls.right: 
+    console.log("P1 r")
+    world.p1.pos.x+=10
+    break;
+  }
+  render()
+}
+
+function fightloop(){
+
+  render()
 
 }
