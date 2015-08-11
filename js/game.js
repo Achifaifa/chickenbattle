@@ -1,6 +1,6 @@
 var c=document.getElementById("game");
 c.style.background="#000000";
-var ctx=c.getContext("2d");
+ctx=c.getContext("2d");
 ctx.canvas.width=window.innerWidth;
 ctx.canvas.height=window.innerHeight;
 ctx.fillStyle="white"
@@ -14,11 +14,11 @@ world={
     maxlife:100,
     character:null,
     controls:{
-      left:",",
-      right:".",
-      jump:"z",
-      punch:"x",
-      kick:"c"
+      left:",".charCodeAt(),
+      right:".".charCodeAt(),
+      jump:"z".charCodeAt(),
+      punch:"x".charCodeAt(),
+      kick:"c".charCodeAt()
     },
     pos:{x:(window.innerWidth/4)-testplayer.width,y:window.innerHeight/2},
   },
@@ -37,11 +37,15 @@ world={
     pos:{x:window.innerWidth*3/4,y:window.innerHeight/2},
   },
   roundtime:99,
-  rounds:{1:0,2:0,3:0}
+  rounds:{1:0,2:0,3:0},
+  chars:{
+    test:1
+  }
 }
 
-function main()
-{
-  fight(ctx,world)
+function main(){
+
+  document.addEventListener("keydown", processkey, false);
+  fightloop(ctx,world)
 }
 
