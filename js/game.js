@@ -43,9 +43,14 @@ world={
   }
 }
 
+<<<<<<< HEAD
 function main(){
 
   document.addEventListener("keydown", processkey, false);
   fightloop(ctx,world)
+=======
+function main()
+{
+	mainMenu();
+>>>>>>> cdc7102bfb971854b7dc2a2c2799d312a53f20d0
 }
-
