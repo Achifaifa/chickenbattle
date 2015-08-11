@@ -69,8 +69,8 @@ function render(){
 function processkey(ev){
 
   console.log("event!")
-  console.log(ev.charKey)
-  switch (ev.keyCode){
+  console.log(ev)
+  switch (ev.key){
   case world.p1.controls.left: 
     console.log("P1 l")
     world.p1.pos.x-=10

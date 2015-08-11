@@ -14,11 +14,11 @@ world={
     maxlife:100,
     character:null,
     controls:{
-      left:",".charCodeAt(),
-      right:".".charCodeAt(),
-      jump:"z".charCodeAt(),
-      punch:"x".charCodeAt(),
-      kick:"c".charCodeAt()
+      left:",",
+      right:".",
+      jump:"z",
+      punch:"x",
+      kick:"c"
     },
     pos:{x:(window.innerWidth/4)-testplayer.width,y:window.innerHeight/2},
   },
@@ -47,3 +47,4 @@ function main(){
 
   document.addEventListener("keydown", processkey, false);
   fightloop(ctx,world)
+}
