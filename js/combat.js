@@ -50,8 +50,7 @@ function gui(){
   ctx.fillText(world.p2.namev,window.innerWidth-60-(world.p2.namev.length*15),100)
   ctx.font="15px sans-serif";
 
-  ctx.stroke()
-}
+  }
 
 function drawchars(){
 
@@ -59,32 +58,66 @@ function drawchars(){
   ctx.drawImage(testplayer,world.p2.pos.x,world.p2.pos.y)
 }
 
+function draweffects(){
+
+  if (world.p1.punching==1){ctx.fillText("POW!",world.p1.pos.x,world.p1.pos.y)}
+  if (world.p1.kicking==1){ctx.fillText("THUD!",world.p1.pos.x,world.p1.pos.y)}
+  if (world.p1.jumping==1){ctx.fillText("*jump*",world.p1.pos.x,world.p1.pos.y)}
+
+}
+
 function render(){
 
   background();
   drawchars();
-  gui()
+  draweffects();
+  gui();
+  ctx.stroke()
+}
+
+function updateworld(){
+
+  if (world.p1.jumping==1){world.p1.jumpstep++}
+  if (world.p1.punching==1){world.p1.punchstep++}
+  if (world.p1.kicking==1){world.p1.kickstep++}
+  if (world.p1.jumpstep>5){world.p1.jumpstep=0; world.p1.jumping=0}
+  if (world.p1.punchstep>5){world.p1.punchstep=0; world.p1.punching=0}
+  if (world.p1.kickstep>5){world.p1.kickstep=0; world.p1.kicking=0}
 }
 
 function processkey(ev){
 
-  console.log("event!")
-  console.log(ev)
   switch (ev.key){
   case world.p1.controls.left: 
-    console.log("P1 l")
     world.p1.pos.x-=10
     break;
   case world.p1.controls.right: 
-    console.log("P1 r")
     world.p1.pos.x+=10
     break;
+  case world.p1.controls.jump:
+    world.p1.jumping=1
+    break;
+  case world.p1.controls.punch:
+    if (world.p2.life>0 && world.p1.punching==0){
+      world.p1.punching=1
+      if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
+        world.p2.life-=5
+      }
+    }
+    break;
+  case world.p1.controls.kick:
+    if (world.p2.life>0 && world.p1.kicking==0){
+      world.p1.kicking=1
+      if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
+        world.p2.life-=10
+      }
+    }
+    break;
   }
-  render()
 }
 
 function fightloop(){
 
+  updateworld()
   render()
-
 }
