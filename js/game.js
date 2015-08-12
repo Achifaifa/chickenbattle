@@ -63,7 +63,9 @@ world={
     }
   },
   roundtime:99,
-  rounds:{1:0,2:0,3:0},
+  rounds:["O","O","O"],
+  currentround:0,
+  fighting:0,
   chars:{
     test:1
   }
@@ -71,6 +73,7 @@ world={
 
 function main(){
 
+  world.fighting=1
   document.addEventListener("keydown", processkeydown, false);
   document.addEventListener("keyup", processkeyup, false);
   setInterval(fightloop,50)

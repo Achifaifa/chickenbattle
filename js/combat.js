@@ -50,6 +50,9 @@ function gui(){
   ctx.fillText(world.p2.namev,window.innerWidth-60-(world.p2.namev.length*15),100)
   ctx.font="15px sans-serif";
 
+  // Draw rounds
+  ctx.fillText(world.rounds[0]+" "+world.rounds[1]+" "+world.rounds[2],middle-22,20)
+
   }
 
 function drawchars(){
@@ -85,30 +88,59 @@ function updateworld(){
   if (world.p1.kickstep>5){world.p1.kickstep=0; world.p1.kicking=0}
 }
 
+function restart(){
+
+  world.p1.life=world.p1.maxlife
+  world.p2.life=world.p2.maxlife
+  world.currentround++
+  world.p1.pos={x:(window.innerWidth/4)-testplayer.width,y:window.innerHeight/2}
+  world.p2.pos={x:window.innerWidth*3/4,y:window.innerHeight/2}
+  world.p1.jumping=0;
+  world.p1.jumpstep=0;
+  world.p1.punching=0;
+  world.p1.punchstep=0;
+  world.p1.kicking=0;
+  world.p1.kickstep=0;
+  world.p2.jumping=0;
+  world.p2.jumpstep=0;
+  world.p2.punching=0;
+  world.p2.punchstep=0;
+  world.p2.kicking=0;
+  world.p2.kickstep=0;
+
+}
+
 function maintainedkeys(){
 
   if (world.p1.pkeys.left==1){world.p1.pos.x-=10}
   if (world.p1.pkeys.right==1){world.p1.pos.x+=10} 
   if (world.p1.pkeys.jump==1 && world.p1.jumping==0){world.p1.jumping=1}
   if (world.p1.pkeys.punch && world.p2.life>0 && world.p1.punching==0){
-      world.p1.punching=1
-      if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
-        world.p2.life-=5
-        if (world.p2.life<0){world.p2.life=0}
+    world.p1.punching=1
+    if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
+      world.p2.life-=5
+      if (world.p2.life<=0){
+        world.p2.life=0
+        world.rounds[world.currentround]="1"
+        restart()
       }
+    }
   }
   if (world.p1.pkeys.kick==1 && world.p2.life>0 && world.p1.kicking==0){
-      world.p1.kicking=1
-      if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
-        world.p2.life-=10
-        if (world.p2.life<0){world.p2.life=0}
+    world.p1.kicking=1
+    if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
+      world.p2.life-=10
+      if (world.p2.life<=0){
+        world.p2.life=0
+        world.rounds[world.currentround]="1"
+        restart()
       }
+    }
   }
 }
 
 function processkeydown(ev){
 
-  console.log("pressed",ev.key)
   switch (ev.key){
   case world.p1.controls.left: 
     world.p1.pkeys.left=1
@@ -130,7 +162,6 @@ function processkeydown(ev){
 
 function processkeyup(ev){
   
-  console.log("released",ev.key)
   switch (ev.key){
   case world.p1.controls.left: 
     world.p1.pkeys.left=0
@@ -152,7 +183,9 @@ function processkeyup(ev){
 
 function fightloop(){
 
-  maintainedkeys()
-  updateworld()
+  if (world.fighting==1){
+    maintainedkeys()
+    updateworld()
+  }
   render()
 }
