@@ -85,39 +85,74 @@ function updateworld(){
   if (world.p1.kickstep>5){world.p1.kickstep=0; world.p1.kicking=0}
 }
 
-function processkey(ev){
+function maintainedkeys(){
 
-  switch (ev.key){
-  case world.p1.controls.left: 
-    world.p1.pos.x-=10
-    break;
-  case world.p1.controls.right: 
-    world.p1.pos.x+=10
-    break;
-  case world.p1.controls.jump:
-    world.p1.jumping=1
-    break;
-  case world.p1.controls.punch:
-    if (world.p2.life>0 && world.p1.punching==0){
+  if (world.p1.pkeys.left==1){world.p1.pos.x-=10}
+  if (world.p1.pkeys.right==1){world.p1.pos.x+=10} 
+  if (world.p1.pkeys.jump==1 && world.p1.jumping==0){world.p1.jumping=1}
+  if (world.p1.pkeys.punch && world.p2.life>0 && world.p1.punching==0){
       world.p1.punching=1
       if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
         world.p2.life-=5
+        if (world.p2.life<0){world.p2.life=0}
       }
-    }
-    break;
-  case world.p1.controls.kick:
-    if (world.p2.life>0 && world.p1.kicking==0){
+  }
+  if (world.p1.pkeys.kick==1 && world.p2.life>0 && world.p1.kicking==0){
       world.p1.kicking=1
       if (Math.abs(world.p1.pos.x-world.p2.pos.x)<150){
         world.p2.life-=10
+        if (world.p2.life<0){world.p2.life=0}
       }
-    }
+  }
+}
+
+function processkeydown(ev){
+
+  console.log("pressed",ev.key)
+  switch (ev.key){
+  case world.p1.controls.left: 
+    world.p1.pkeys.left=1
+    break;
+  case world.p1.controls.right: 
+    world.p1.pkeys.right=1
+    break;
+  case world.p1.controls.jump:
+    world.p1.pkeys.jump=1
+    break;
+  case world.p1.controls.punch:
+    world.p1.pkeys.punch=1
+    break;
+  case world.p1.controls.kick:
+    world.p1.pkeys.kick=1
+    break;
+  }
+}
+
+function processkeyup(ev){
+  
+  console.log("released",ev.key)
+  switch (ev.key){
+  case world.p1.controls.left: 
+    world.p1.pkeys.left=0
+    break;
+  case world.p1.controls.right: 
+    world.p1.pkeys.right=0
+    break;
+  case world.p1.controls.jump:
+    world.p1.pkeys.jump=0
+    break;
+  case world.p1.controls.punch:
+    world.p1.pkeys.punch=0
+    break;
+  case world.p1.controls.kick:
+    world.p1.pkeys.kick=0
     break;
   }
 }
 
 function fightloop(){
 
+  maintainedkeys()
   updateworld()
   render()
 }

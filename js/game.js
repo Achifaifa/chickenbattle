@@ -26,7 +26,14 @@ world={
     punching:0,
     punchstep:0,
     kicking:0,
-    kickstep:0
+    kickstep:0,
+    pkeys:{
+      jump:0,
+      left:0,
+      right:0,
+      punch:0,
+      kick:0
+    }
   },
   p2:{
     namev:"Player 2",
@@ -46,7 +53,14 @@ world={
     punching:0,
     punchstep:0,
     kicking:0,
-    kickstep:0
+    kickstep:0,
+    pkeys:{
+      jump:0,
+      left:0,
+      right:0,
+      punch:0,
+      kick:0
+    }
   },
   roundtime:99,
   rounds:{1:0,2:0,3:0},
@@ -57,6 +71,7 @@ world={
 
 function main(){
 
-  document.addEventListener("keydown", processkey, false);
+  document.addEventListener("keydown", processkeydown, false);
+  document.addEventListener("keyup", processkeyup, false);
   setInterval(fightloop,50)
 }
