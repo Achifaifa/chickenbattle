@@ -31,9 +31,6 @@ function gui(){
   // Draw life bars
   var perc1=(world.p1.life*100)/world.p1.maxlife
   var perc2=(world.p2.life*100)/world.p2.maxlife
-  ctx.rect(50,20,middle-100,50)
-  ctx.rect(window.innerWidth-50,20,-middle+100,50)
-  ctx.stroke()
   ctx.fillStyle="#FF0000"
   ctx.fillRect(49,21,middle-98,48)
   ctx.fillRect(window.innerWidth-49,21,-middle+98,48)
@@ -52,7 +49,6 @@ function gui(){
 
   // Draw rounds
   ctx.fillText(world.rounds[0]+" "+world.rounds[1]+" "+world.rounds[2],middle-22,20)
-
   }
 
 function drawchars(){
@@ -95,19 +91,18 @@ function restart(){
   world.currentround++
   world.p1.pos={x:(window.innerWidth/4)-testplayer.width,y:window.innerHeight/2}
   world.p2.pos={x:window.innerWidth*3/4,y:window.innerHeight/2}
-  world.p1.jumping=0;
-  world.p1.jumpstep=0;
-  world.p1.punching=0;
-  world.p1.punchstep=0;
-  world.p1.kicking=0;
-  world.p1.kickstep=0;
-  world.p2.jumping=0;
-  world.p2.jumpstep=0;
-  world.p2.punching=0;
-  world.p2.punchstep=0;
-  world.p2.kicking=0;
-  world.p2.kickstep=0;
-
+  world.p1.jumping=0 
+  world.p1.jumpstep=0
+  world.p1.punching=0
+  world.p1.punchstep=0 
+  world.p1.kicking=0 
+  world.p1.kickstep=0
+  world.p2.jumping=0 
+  world.p2.jumpstep=0
+  world.p2.punching=0
+  world.p2.punchstep=0 
+  world.p2.kicking=0 
+  world.p2.kickstep=0
 }
 
 function maintainedkeys(){
